@@ -18,7 +18,7 @@
                                 <a href="{{ vich_uploader_asset(picture, 'imageFile') }}" class="glightbox" data-gallery="gallery-{{ current_index }}">
                                     <img class="card-img-top" alt="{{ event.title }}-{{ loop.index }}" src="{{ vich_uploader_asset(picture, 'imageFile')|imagine_filter('live_image') }}">
                                 </a>
-                                <div class="text-bg-dark px-3 py-2 small text-truncate">von <span class="text-primary">{{ picture.publishedBy }}</span></div>
+                                <div class="text-bg-dark px-2 py-1 small text-truncate">von <span class="text-primary">{{ picture.publishedBy }}</span></div>
                             </div>
                             {% endif %}
                         {% endfor %}

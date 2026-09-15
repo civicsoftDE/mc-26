@@ -1,0 +1,4 @@
+Your password should be at least {{ limit }} characters: Dein Passwort sollte mindestens {{ limit }} Zeichen enthalten.
+Please enter a password: Bitte gib ein Passwort an.
+You should agree to our terms.: Bitte stimme unseren Nutzungsbedingungen zu.
+There is already an account with this username: Dieser Benutzername existiert bereits.

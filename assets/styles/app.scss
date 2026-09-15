@@ -1,0 +1,107 @@
+$primary: #ffc329;
+$secondary: #670026;
+$enable-rounded: false;
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+@import '../vendor/glightbox/dist/css/glightbox.min.css';
+
+.gdesc-inner {
+    background-color: $black;
+    color: $white;
+}
+
+.polka {
+    width: 100%;
+    height: 100%;
+    /* Add your background pattern here */
+    background-color: rgb(18, 18, 18);
+    background-image: radial-gradient(rgba(50, 50, 50, 0.171) 1px, transparent 0);
+    background-size: 6px 6px;
+    background-position: -2px -2px
+}
+
+.mastodon-post {
+    border: none;
+    border-left: 8px solid $secondary; /* Mastodon-Blau */
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.concert-entry {
+    background-color: darken($gray-700,20%)!important;
+}
+
+.concert-entry:hover {
+    background-color: $secondary!important;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.grunge-1 {
+    position: relative; /* wichtig: Bezugsrahmen für ::before */
+    display: block;
+    z-index: 1; /* Text liegt über dem Pseudo-Element */
+    color: var(--bs-primary);
+    font-weight: bold;
+}
+
+.grunge-1::before {
+    content: '';
+    position: absolute;
+    inset: -0.3em -2em; /* top/bottom, left/right – neg. Werte = rausragen */
+    background-image: url('../img/grunge-bg-1.svg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: left center;
+    z-index: -1; /* hinter den Text */
+}
+
+.grunge-2 {
+    position: relative; /* wichtig: Bezugsrahmen für ::before */
+    display: block;
+    z-index: 1; /* Text liegt über dem Pseudo-Element */
+    color: var(--bs-primary);
+    font-weight: bold;
+}
+
+.grunge-2::before {
+    content: '';
+    position: absolute;
+    inset: -0.3em -1em; /* top/bottom, left/right – neg. Werte = rausragen */
+    background-image: url('../img/grunge-bg-2.svg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: left center;
+    z-index: -1; /* hinter den Text */
+}
+
+.grunge-3 {
+    position: relative; /* wichtig: Bezugsrahmen für ::before */
+    display: block;
+    z-index: 1; /* Text liegt über dem Pseudo-Element */
+    color: var(--bs-primary);
+    font-weight: bold;
+}
+
+.grunge-3::before {
+    content: '';
+    position: absolute;
+    inset: -0.3em -1em; /* top/bottom, left/right – neg. Werte = rausragen */
+    background-image: url('../img/grunge-bg-3.svg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: left center;
+    z-index: -1; /* hinter den Text */
+}
+
+footer {
+    margin-top: auto;
+}

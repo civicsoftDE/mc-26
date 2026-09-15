@@ -1,0 +1,14 @@
+<div class="list-group-item px-0">
+    <div class="d-flex flex-column align-items-start">
+        <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex gap-2 align-items-center">
+                {% if app.user == comment.user and comment.createdAt > "now"|date_modify('-10 minutes')%}
+                    <a href="#" hx-target="#comments-list" hx-post="{{ path('concert_remove_comment', {'id': comment.id}) }}" class="link-danger"><i class="bi bi-trash"></i></a>
+                {% endif %}
+                <div class="fw-bold text-primary">{{ comment.user.username }}</div>
+            </div>
+            <div class="small text-muted">{{ comment.createdAt|ago }}</div>
+        </div>
+        <div>{{ comment.content }}</div>
+    </div>
+</div>

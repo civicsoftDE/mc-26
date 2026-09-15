@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meine Fanbase{% endblock %}
+
+{% block body %}
+<div class="">
+    <div class="container py-3">
+        <h1 class="mb-3">Meine Fanbase</h1>
+
+        <h2 class="">Konzertfoto hochladen</h2>
+        <p class="lead">
+            Teile deine eigenen Fotos unserer Konzerte mit allen Fans. Wir freuen uns über deinen Beitrag.
+        </p>
+        <div class="row mb-5">
+
+            <div class="col-12 col-lg-6">
+                {{ form_errors(upload_form) }}
+
+                {{ form_start(upload_form, {'attr': {
+                    'class' : 'needs-validation',
+                    'novalidate': 'novalidate',
+                    'action': path('profile_upload_image')
+                }}) }}
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        {{ form_row(upload_form.liveEvent) }}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        {{ form_row(upload_form.imageFile) }}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center gap-3">
+                            <button type="submit" class="btn btn-primary">Hochladen</button>
+                        </div>
+
+                    </div>
+                </div>
+                {{ form_end(upload_form) }}
+            </div>
+        </div>
+
+
+        <h2 class="h4 bg-primary px-3 py-1 text-black">Meine Fotos</h2>
+        <div class="row row-cols-2 row-cols-lg-6 g-2">
+            {% for picture in pictures %}
+                <div class="col">
+                    <a href="{{ vich_uploader_asset(picture, 'imageFile') }}" class="glightbox" data-gallery="gallery-1">
+                        <img class="card-img-top" alt="{{ picture.liveEvent }}-{{ loop.index }}" src="{{ vich_uploader_asset(picture, 'imageFile')|imagine_filter('live_image') }}">
+                    </a>
+                    <div class="text-bg-dark d-flex align-items-center justify-content-between">
+                        <div class="badge text-bg-dark rounded-3 text-muted">{{ picture.isPublished ? 'publiziert' : 'austehend' }}</div>
+                        <form method="post" action="{{ path('profile_delete_image', {'id': picture.id}) }}" onsubmit="return confirm('Bild wirklich löschen?');" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete-image-' ~ picture.id) }}">
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

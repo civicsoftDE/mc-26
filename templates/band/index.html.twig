@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Band{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3 d-lg-none">Band</h1>
+            <h2 class="h4 bg-primary px-3 py-1 text-black">Biographie</h2>
+            <div class="mb-3 p-3 bg-dark">
+                <p>Madness Crunch steht für ehrlichen, handgemachten Rock aus der Hauptstadt. Seit 2020, und damit seit
+                    nunmehr sechs Jahren, verbinden die drei das Beste aus klassischem Rock’n’Roll und melodischem Punk,
+                    ohne dabei in abgedroschenen Klischees zu versinken.</p>
+                <p>Ihr Sound ist das perfekte Fundament für einen gelungenen Abend: Statt auf reine Lautstärke setzen
+                    Madness Crunch auf starke Melodien, eingängige Hooks und eine Spielfreude, die sofort auf das
+                    Publikum überspringt. Es ist Musik zum Mitwippen, Mitgrölen und einfach mal Abschalten. Dennoch sind
+                    die Texte von Madness Crunch der Soundtrack zu einer Zeit, die Haltung braucht. Statt mit dem
+                    erhobenen Zeigefinger zu agitieren, beobachten sie die Gesellschaft genau. Ihre Songs handeln von
+                    Solidarität, dem Hinterfragen des Status quo und dem Mut, die eigene Meinung zu sagen, verpackt in
+                    starke Hooks und eingängige Melodien. Die Berliner Szene hat sie mit ihrer entspannten, aber stets
+                    souveränen Art schnell ins Herz geschlossen.</p>
+                <p>Ein Gig von Madness Crunch ist wie ein gutes Gespräch unter alten Freunden: ehrlich, auf den Punkt
+                    und mit jeder Menge guter Laune. Wer handfesten Rock mag, der im Kopf bleibt und die Köpfe zum
+                    Wippen bringt, ist bei den dreien genau richtig.</p>
+            </div>
+            <h2 class="h4 bg-primary px-3 py-1 text-black">Aktuelle Bandmitglieder</h2>
+            <div class="row row-cols-2 row-cols-lg-4 g-2 mb-3">
+                {% for member in members %}
+                    {% if not member.isHelpingHand and not member.isOld %}
+                <div class="col">
+                    <div class="card concert-entry border-0">
+                        <img class="card-img-top" alt="Typ" src="{{ vich_uploader_asset(member, 'imageFile')|imagine_filter('live_image') }}">
+                        <div class="card-body">
+                            {% if member.beginDate %}
+                                <p class="card-text mb-0 small">Seit {{ member.beginDate|date('Y') }}</p>
+                            {% endif %}
+                            <p class="card-text mb-0">{{ member.shortDescription }}</p>
+                            <a href="{{ path('band_show', {'slug': member.slug}) }}" class="stretched-link text-decoration-none fs-5">{{ member.nickname }}</a>
+                        </div>
+                    </div>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <h2 class="h4 bg-primary px-3 py-1 text-black">Helfende Hände</h2>
+            <div class="row row-cols-2 row-cols-lg-4 g-2 mb-3">
+                {% for member in members %}
+                    {% if member.isHelpingHand and not member.isOld %}
+                        <div class="col">
+                            <div class="card concert-entry border-0">
+                                <img class="card-img-top" alt="Typ" src="{{ vich_uploader_asset(member, 'imageFile')|imagine_filter('live_image') }}">
+                                <div class="card-body">
+                                    {% if member.beginDate %}
+                                        <p class="card-text mb-0 small">Seit {{ member.beginDate|date('Y') }}</p>
+                                    {% endif %}
+                                    <p class="card-text mb-0">{{ member.shortDescription }}</p>
+                                    <a href="{{ path('band_show', {'slug': member.slug}) }}" class="stretched-link text-decoration-none fs-5">{{ member.nickname }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <h2 class="h4 bg-light px-3 py-1 text-black">Ehemalige Bandmitglieder</h2>
+            <div class="row row-cols-2 row-cols-lg-4 g-2 mb-3">
+                {% for member in members %}
+                    {% if member.isOld %}
+                        <div class="col">
+                            <div class="card border-0">
+                                <div class="card-body">
+                                    {% if member.endDate %}
+                                        <p class="card-text mb-0 small">Bis {{ member.endDate|date('Y') }}</p>
+                                    {% endif %}
+                                    <p class="card-text mb-0">{{ member.shortDescription }}</p>
+                                    <div class="fs-5 text-primary">{{ member.nickname }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Konzertfotos{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3 d-lg-none">Fotos</h1>
+            {% for event in events %}
+                {% if event.eventPictures is not empty %}
+                    {% set current_index = loop.index %}
+                    <h2 class="h4 bg-primary px-3 py-1 text-black">{{ event.title }}</h2>
+                    <p class="px-3">{{ event.startsAt|date('d.m.Y') }} | {{ event.location }}</p>
+                    <div class="row row-cols-2 row-cols-lg-4 g-2 mb-3">
+                        {% for picture in event.eventPictures %}
+                            {% if picture.isPublished %}
+                            <div class="col">
+                                <a href="{{ vich_uploader_asset(picture, 'imageFile') }}" class="glightbox" data-gallery="gallery-{{ current_index }}">
+                                    <img class="card-img-top" alt="{{ event.title }}-{{ loop.index }}" src="{{ vich_uploader_asset(picture, 'imageFile')|imagine_filter('live_image') }}">
+                                </a>
+                                <div class="text-bg-dark px-3 py-2 small text-truncate">von <span class="text-primary">{{ picture.publishedBy }}</span></div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

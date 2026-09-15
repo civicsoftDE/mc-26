@@ -1,0 +1,8 @@
+<ul class="list-unstyled">
+    {% for item in items %}
+        <li class="nav-item">
+            <a class="nav-link mb-2"
+               href="{{ path('app_page_show',{'slug': item.slug}) }}">{{ item.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

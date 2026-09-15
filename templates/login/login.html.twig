@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container py-3">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <h1>Anmelden</h1>
+    <p class="lead">
+        Melde dich an, um exklusiven Zugriff auf deine Fanbase zu bekommen.
+    </p>
+
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <form method="post" class="needs-validation" novalidate>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Benutzername</label>
+                            <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Passwort</label>
+                            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" name="_remember_me" id="_remember_me">
+                            <label for="_remember_me" class="form-check-label">Eingeloggt bleiben?</label>
+                        </div>
+                        <p class="small text-muted">
+                            Du musst dich eine Zeit lang nicht jedes Mal erneut einloggen.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center gap-3">
+                            <button class="btn btn-primary" type="submit">Anmelden</button>
+                            <a href="{{ path('app_register') }}">Stattdessen registrieren?</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

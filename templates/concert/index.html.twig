@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Konzerte{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3 d-lg-none">Konzerte</h1>
+            <h2 class="h4 bg-primary px-3 py-1 text-black">Kommende Konzerte</h2>
+            {{ include('concert/_concert_list.html.twig', {'elements': concerts}) }}
+
+            <h2 class="h4 bg-light px-3 py-1 text-black">Vergangene Konzerte</h2>
+            {{ include('concert/_concert_list.html.twig', {'elements': old_concerts}) }}
+        </div>
+    </div>
+{% endblock %}

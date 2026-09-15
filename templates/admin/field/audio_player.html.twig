@@ -1,0 +1,14 @@
+{# templates/admin/field/audio_player.html.twig #}
+{% if field.value %}
+    <div class="d-flex flex-column align-items-start">
+        <audio controls style="width: 100%; max-width: 350px; margin-bottom: 8px;">
+            <source src="/audio/music{{ asset(field.value) }}" type="audio/mpeg">
+            Dein Browser unterstützt das Audio-Element nicht.
+        </audio>
+        <a href="/audio/music{{ asset(field.value) }}" download class="btn btn-sm btn-secondary">
+            <i class="fa fa-download"></i> MP3 herunterladen
+        </a>
+    </div>
+{% else %}
+    <span class="text-muted fst-italic">Keine Audiodatei vorhanden</span>
+{% endif %}

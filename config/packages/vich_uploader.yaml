@@ -1,0 +1,49 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+
+        music:
+            uri_prefix: /audio/music
+            upload_destination: '%kernel.project_dir%/public/audio/music'
+            namer: App\Service\UuidNamerService
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        concert_images:
+            uri_prefix: /images/concert_images
+            upload_destination: '%kernel.project_dir%/public/images/concert_images'
+            namer: App\Service\UuidNamerService
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        concerts:
+            uri_prefix: /images/concerts
+            upload_destination: '%kernel.project_dir%/public/images/concerts'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        members:
+            uri_prefix: /images/members
+            upload_destination: '%kernel.project_dir%/public/images/members'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'
+    #        namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

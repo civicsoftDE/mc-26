@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Band{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3 d-lg-none">Band</h1>
+            <h2 class="h4 bg-primary px-3 py-1 text-black">{{ member.nickname }}</h2>
+            <div class="row g-2">
+                <div class="col-12 col-lg-4">
+                    <img class="img-fluid w-100" alt="Typ" src="{{ vich_uploader_asset(member, 'imageFile')|imagine_filter('member_h') }}">
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="p-3 bg-dark  h-100">
+                        <p class="lead">{{ member.shortDescription }}</p>
+                        <div class="fw-bold text-primary">Über {{ member.nickname }}</div>
+                        {{ member.description|raw }}
+                    </div>
+                </div>
+                <div class="col-6"><a href="#" class="btn btn-primary disabled w-100">Zurück</a></div>
+                <div class="col-6"><a href="#" class="btn btn-primary w-100">Weiter</a></div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

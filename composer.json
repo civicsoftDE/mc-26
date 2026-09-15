@@ -10,8 +10,13 @@
         "doctrine/doctrine-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6",
+        "easycorp/easyadmin-bundle": "^5.5",
+        "knplabs/knp-time-bundle": "^2.5",
+        "liip/imagine-bundle": "^2.17",
         "phpdocumentor/reflection-docblock": "^6.0",
         "phpstan/phpdoc-parser": "^2.3",
+        "stof/doctrine-extensions-bundle": "^1.15",
+        "symfony/apache-pack": "*",
         "symfony/asset": "8.1.*",
         "symfony/asset-mapper": "8.1.*",
         "symfony/console": "8.1.*",
@@ -41,8 +46,12 @@
         "symfony/validator": "8.1.*",
         "symfony/web-link": "8.1.*",
         "symfony/yaml": "8.1.*",
+        "symfonycasts/sass-bundle": "^0.10.0",
+        "symfonycasts/verify-email-bundle": "^1.18",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/intl-extra": "^3.26",
+        "twig/twig": "^2.12|^3.0",
+        "vich/uploader-bundle": "^2.10"
     },
     "config": {
         "allow-plugins": {
@@ -93,7 +102,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "8.1.*"
         }
     },
@@ -104,6 +113,7 @@
         "symfony/debug-bundle": "8.1.*",
         "symfony/maker-bundle": "^1.0",
         "symfony/stopwatch": "8.1.*",
-        "symfony/web-profiler-bundle": "8.1.*"
+        "symfony/web-profiler-bundle": "8.1.*",
+        "twbs/bootstrap": "^5.3"
     }
 }

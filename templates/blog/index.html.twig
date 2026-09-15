@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3 d-lg-none">News</h1>
+            <div class="row row-cols-1 row-cols-lg-3 g-2 mb-2">
+                {% for post in posts %}
+                <div class="col">
+                        <article class="card card-body border-0 concert-entry h-100 mb-3">
+                            <header>
+                                <time class="small text-muted">{{ post.created_at|ago }}</time>
+                            </header>
+                            <div class="content">
+                                {{ post.content|raw }}
+                            </div>
+                            {% if post.media_attachments|length > 0 %}
+                                <div class="media mb-3">
+                                    {% for media in post.media_attachments %}
+                                        {% if media.type == 'image' %}
+                                            <a href="{{ media.url }}" class="glightbox" data-gallery="gallery1" data-description="{{ post.content|raw }}">
+                                                <img class="img-fluid w-100" src="{{ media.preview_url }}" alt="{{ media.description }}">
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <footer class="d-flex justify-content-between align-items-center">
+                                <a href="{{ post.url }}" class="btn btn-sm btn-outline-light d-flex align-items-center gap-2" target="_blank" rel="noopener">
+                                    Auf Mastodon ansehen<i class="bi bi-box-arrow-up-right"></i>
+                                </a>
+                                <div class="stats d-flex align-items-center gap-2">
+{#                                    <i class="bi bi-star-fill text-primary"></i> {{ post.favourites_count }}#}
+                                </div>
+                            </footer>
+                        </article>
+            </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

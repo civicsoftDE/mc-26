@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Konzerte{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3">{{ current_live_event.title }}</h1>
+            {% if current_live_event.imageName %}
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <img
+                            src="{{ vich_uploader_asset(current_live_event, 'imageFile')|imagine_filter('concert_h') }}"
+                            alt="{{ current_live_event.name|default('Bild') }}"
+                            class="img-fluid w-100">
+                    </div>
+                </div>
+            {% endif %}
+            <h2 class="h4 bg-primary px-3 py-1 text-black">Überblick</h2>
+            <div class="bg-dark text-white p-3 mb-3">
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <div class="fw-bold fs-4">{{ current_live_event.startsAt|date('d.m.Y') }}
+                            - {{ current_live_event.startsAt|date('H:i') }} Uhr
+                        </div>
+                        <div>Doors: {{ current_live_event.doorsOpenAt|date('H:i') }} Uhr</div>
+                        {% if current_live_event.isAgeRestricted %}
+                            <div class="badge text-bg-danger">Ab {{ current_live_event.ageLimit }} Jahren</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-lg-7 mb-2 mb-lg-0">
+                        <div class="d-flex justify-content-start gap-3 align-items-center flex-wrap">
+                            <div class="fw-bold fs-4 text-truncate">{{ current_live_event.location.city }}, {{ current_live_event.location.country }}</div>
+                        </div>
+                        <div>{{ current_live_event.location.name }}</div>
+                        {% if current_live_event.SupportActs is not empty %}
+                            <div>Mit: {{ current_live_event.supportActs|join(', ') }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-3">
+                        Anschrift
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        {{ current_live_event.location.street }}<br>
+                        {{ current_live_event.location.zipCode }} {{ current_live_event.location.city }}
+                    </div>
+                </div>
+                {% if current_live_event.location.websiteUrl %}
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-3">
+                        Location-Info
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <a href="{{ current_live_event.location.websiteUrl }}" target="_blank">Website</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <h2 class="h4 bg-primary px-3 py-1 text-black">Tickets</h2>
+            <div class="bg-dark text-white p-3 mb-3 d-flex flex-column gap-3">
+                {% if  current_live_event.hasVkk %}
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="badge text-bg-primary" style="width: 50px">VVK</div>
+                            {% if current_live_event.hasTickets and not current_live_event.isFreeEntry %}
+                                {{ current_live_event.pricePresale|format_currency('EUR') }}
+                            {% else %}
+                                kostenlos
+                            {% endif %}
+                        </div>
+                        <div>
+                            {% if current_live_event.hasTickets %}
+                                <a href="#" class="btn btn-primary">Kaufen</a>
+                            {% else %}
+
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if  current_live_event.hasAk %}
+                    <div class="d-flex align-items-center justify-content-between" style="min-height: 38px">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="badge text-bg-info" style="width: 50px">AK</div>
+                            {% if current_live_event.priceDoor > 0 and not current_live_event.isFreeEntry %}
+                                {{ current_live_event.priceDoor|format_currency('EUR') }}
+                            {% else %}
+                                kostenlos
+                            {% endif %}
+                        </div>
+                        <div></div>
+                    </div>
+                {% endif %}
+                {% if not current_live_event.hasTickets %}
+                    <div>Es sind keine Tickets erforderlich. Kommt einfach vorbei.</div>
+                {% endif %}
+            </div>
+
+            {% if current_live_event.description %}
+                <h2 class="h4 bg-primary px-3 py-1 text-black">Details</h2>
+                <div class="bg-dark text-white p-3 mb-3 d-flex flex-column gap-3">
+                    {{ current_live_event.description|raw }}
+                </div>
+            {% endif %}
+
+            <h2 class="h4 bg-light px-3 py-1 text-black">Was die Fans sagen</h2>
+            {% if app.user %}
+                <div id="comment-form-wrapper">
+                    {# Wir lagern das Formular in ein Partial aus #}
+                    {{ include('concert/_comment_form.html.twig') }}
+                </div>
+            {% else %}
+                <p class="px-3"><a href="{{ path('app_login') }}">Logge dich ein</a>, um das Konzert zu kommentieren.</p>
+            {% endif %}
+            <div class="bg-dark text-white p-3 mb-3 d-flex flex-column gap-3">
+                <div id="comments-list" class="list-group list-group-flush" hx-get="{{ path('concert_refresh_comments', {id: current_live_event.id}) }}"
+                     hx-trigger="every 60s"
+                     hx-swap="innerHTML">
+                    {% for comment in current_live_event.liveEventComments|sort((a, b) => b.createdAt <=> a.createdAt) %}
+                        {{ include('concert/_comment_item.html.twig', {comment: comment}) }}
+                    {% else %}
+                        <div class="list-group-item px-0">Noch nichts gepostet?</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

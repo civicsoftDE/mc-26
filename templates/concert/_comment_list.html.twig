@@ -1,0 +1,5 @@
+{% for comment in comments|sort((a, b) => b.createdAt <=> a.createdAt) %}
+    {{ include('concert/_comment_item.html.twig', {comment: comment}) }}
+{% else %}
+    <div class="list-group-item">Noch nichts gepostet?</div>
+{% endfor %}

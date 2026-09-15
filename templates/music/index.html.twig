@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Musik{% endblock %}
+
+{% block body %}
+    <div class="">
+        <div class="container py-3">
+            <h1 class="mb-3 d-lg-none">Musik</h1>
+            <div class="list-group list-group-flush">
+                {% for song in songs %}
+                    <div class="list-group-item py-3 concert-entry">
+                        <div class="d-flex flex-column justify-content-between align-items-start">
+                            <div class="fs-4 text-primary mb-0">{{ song.title }}</div>
+                            <div class="text-muted mb-3">{{ song.description|raw }}</div>
+                                <audio controls class="w-100">
+                                    <source src="{{ vich_uploader_asset(song, 'imageFile') }}" type="audio/mpeg">
+                                    Dein Browser unterstützt das Audio-Element nicht.
+                                </audio>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

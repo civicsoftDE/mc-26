@@ -127,4 +127,37 @@
             </div>
         </div>
     </div>
+
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "{{ current_live_event.title }}",
+            "startDate": "{{ current_live_event.startsAt|date('c') }}",
+            "endDate": "{{ current_live_event.endsAt|date('c') }}",
+            "location": {
+            "@type": "Place",
+            "name": "{{ current_live_event.location|default('Unbekannter Ort') }}"
+            },
+            "description": "{{ current_live_event.description|striptags }}",
+            "offers": {
+                "@type": "Offer",
+                "validFrom": "{{ current_live_event.startsAt|date('c') }}",
+                "priceCurrency": "EUR",
+                "price": "0",
+                "availability": "InStock",
+                "url": "{{ url('concert_show',{'slug':current_live_event.slug}) }}"
+            },
+            "organizer": {
+                "@type": "Organization",
+                "name": "Benjamin Wagner",
+                "email": "booking@madnesscrunch.de",
+                "url": "https://www.madnesscrunch.de"
+            },
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "mainEntityOfPage": "{{ url('concert_show',{'slug':current_live_event.slug}) }}",
+            "performer": "Madness Crunch"
+            }
+    </script>
 {% endblock %}

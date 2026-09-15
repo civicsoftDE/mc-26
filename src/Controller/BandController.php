@@ -24,6 +24,8 @@ final class BandController extends AbstractController
     public function show(String $slug, BandMemberRepository $memberRepository): Response
     {
         $member = $memberRepository->findOneBy(['slug' => $slug]);
+        $prev = $memberRepository->findPrevMember($member->getId());
+        $next = $memberRepository->findNextMember($member->getId());
 
         if (!$member) {
             $this->addFlash('danger', 'Das Bandmitglied ist nicht vorhanden');
@@ -32,6 +34,8 @@ final class BandController extends AbstractController
         return $this->render('band/show.html.twig', [
             'controller_name' => 'BandController',
             'member' => $member,
+            'prev' => $prev,
+            'next' => $next,
         ]);
     }
 }

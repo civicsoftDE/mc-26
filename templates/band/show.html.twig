@@ -18,8 +18,16 @@
                         {{ member.description|raw }}
                     </div>
                 </div>
-                <div class="col-6"><a href="#" class="btn btn-primary disabled w-100">Zurück</a></div>
-                <div class="col-6"><a href="#" class="btn btn-primary w-100">Weiter</a></div>
+                {% if prev %}
+                    <div class="col-6"><a href="{{ path('band_show',{'slug': prev.slug}) }}" class="btn btn-primary w-100">Zurück</a></div>
+                {% else %}
+                    <div class="col-6"><a href="#" class="btn btn-light disabled w-100">Zurück</a></div>
+                {% endif %}
+                {% if next %}
+                    <div class="col-6"><a href="{{ path('band_show',{'slug': next.slug}) }}" class="btn btn-primary w-100">Weiter</a></div>
+                {% else %}
+                    <div class="col-6"><a href="#" class="btn btn-light disabled w-100">Weiter</a></div>
+                {% endif %}
             </div>
 
 

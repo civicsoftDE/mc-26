@@ -24,7 +24,7 @@ liip_imagine:
 
             # list of transformations to apply (the "filters")
             filters:
-                thumbnail: { size: [ 800, 800 ], mode: outbound }
+                thumbnail: { size: [ 500, 500 ], mode: outbound }
 
         concert_h:
 

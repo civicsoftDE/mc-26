@@ -61,7 +61,7 @@
                 <ul class="navbar-nav fw-bold">
                     <li class="nav-item">
                         {% if app.user %}
-                            <a class="nav-link d-flex gap-2 {{ active_class(['profile_index', 'profile_edit']) }}" href="{{ path('profile_index') }}"><i class="bi bi-person"></i><span class="d-lg-none">Fanbase</span></a>
+                            <a class="nav-link d-flex gap-2 {{ active_class(['profile_index', 'profile_edit']) }}" href="{{ path('profile_index') }}"><i class="bi bi-person"></i>{{ app.user.username }}</a>
                         {% else %}
                             <a class="nav-link d-flex gap-2 {{ active_class(['app_login', 'app_register']) }}" href="{{ path('app_login') }}"><i class="bi bi-person"></i><span class="d-lg-none">Anmelden</span></a>
                         {% endif %}

@@ -57,5 +57,8 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::linkTo(BandMemberCrudController::class, 'bandMember', 'fas fa-users');
         yield MenuItem::linkTo(MusicCrudController::class, 'music', 'fas fa-music');
         yield MenuItem::linkTo(PageCrudController::class, 'page', 'fas fa-file');
+
+        yield MenuItem::section('User');
+        yield MenuItem::linkTo(UserCrudController::class, 'user', 'fas fa-user');
     }
 }

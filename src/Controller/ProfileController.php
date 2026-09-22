@@ -35,7 +35,12 @@ final class ProfileController extends AbstractController
 
         $picture = new EventPicture();
         $picture->setPublishedBy($this->getUser());
-        $picture->setIsPublished(false);
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $picture->setIsPublished(true);
+        } else {
+            $picture->setIsPublished(false);
+        }
+
         $form = $this->createForm(EventImageType::class, $picture);
         $form->handleRequest($request);
 

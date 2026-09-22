@@ -17,7 +17,7 @@ final class BlogController extends AbstractController
     #[Route('', name: 'index')]
     public function index(MastodonService $mastodon): Response
     {
-        $posts = $mastodon->getAccountPosts('@madnesscrunch@mastodon.social', 12);
+        $posts = $mastodon->getAccountPosts('@madnesscrunch@mastodon.social', 12, "mastodon_blog_posts_");
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
         ]);

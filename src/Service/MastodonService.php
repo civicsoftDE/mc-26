@@ -20,11 +20,11 @@ class MastodonService
     /**
      * @throws InvalidArgumentException
      */
-    public function getAccountPosts(string $username, int $limit = 5): array
+    public function getAccountPosts(string $username, int $limit = 5, string $cacheSlot = "mastodon_posts_"): array
     {
         //$this->cache->delete('mastodon_posts_' . md5($username));
         return $this->cache->get(
-            'mastodon_posts_' . md5($username),
+            $cacheSlot . md5($username),
             function (ItemInterface $item) use ($username, $limit) {
                 $item->expiresAfter(300);
                 // 1. Account-ID holen
